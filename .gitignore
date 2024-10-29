@@ -3,3 +3,4 @@ frontend/dist
 SMS.sqlite
 vendor
 .vscode
+build/bin
