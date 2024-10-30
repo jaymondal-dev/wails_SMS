@@ -4,7 +4,7 @@ package sms
 import (
 	"time"
 )
-
+const SchoolName string = "Name of the School"
 const (
 	Term1atcm  = 10
 	Term1atco  = 10

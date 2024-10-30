@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/base64"
 	"sync"
+	"time"
 
 	// "encoding/base64"
 	"fmt"
@@ -122,10 +123,10 @@ func (a *App) GenerateAndDownloadPDF(student_name string,class_name string,class
 
     // Convert bytes to base64 string
     base64String := base64.StdEncoding.EncodeToString(pdfBytes)
-
+timestamp := time.Now().Format("2006-01-02_15:04:05")
     // Return both the base64 string and filename
     return map[string]interface{}{
-        "filename": fmt.Sprintf("%s_%s.pdf", student_name,class_name),
+        "filename": fmt.Sprintf("%s_%s_%s.pdf", student_name,class_name,timestamp),
         "data":     base64String,
     }, nil
 }
