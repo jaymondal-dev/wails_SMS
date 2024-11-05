@@ -4,7 +4,15 @@ package sms
 import (
 	"time"
 )
+
 const SchoolName string = "Name of the School"
+const SchoolDiseCode string= "19111915102"
+
+const SchoolAddressl1 string = "Vill- Malangapara"
+const SchoolAddressl2 string = "P.O.- Swarupnagar"
+const SchoolAddressl3 string = "Dist- N 24 Pgs"
+
+
 const (
 	Term1atcm  = 10
 	Term1atco  = 10
@@ -18,6 +26,34 @@ const (
 	Term3atco  = 30
 	Term3aips  = 30
 	Term3aimpc = 30
+)
+const (
+	AtcmSubE string = "Ability to communicate"
+	AtcoSubE  string= "ability to correlate"
+	AipsSubE  string= "Ability in Problem Solving"
+	AimpcSubE string= "Ability in physical and mental coordination"
+	AtcmSubB  string= "সংযোগ স্থাপনে সক্ষমতা"
+	AtcoSubB  string= "সমন্বয় সাধনে সক্ষমতা"
+	AipsSubB  string= "সমস্যা সমাধনে সক্ষমতা"
+	AimpcSubB string= "মানসিক ও শারীরিক সমন্বয় সাধনে সক্ষমতা"
+)
+const (
+	Term1flSubE    string= "First Language"
+	Term1slSubE    string= "Second Language"
+	Term1MSubE     string= "Mathematics"
+	Term1ESubE     string= "Our Environment"
+	Term1hpethSubE string= "Health and Physical Education Theory"
+	Term1hpeprSubE string= "Health and Physical Education Practical"
+	Term1awethSubE string= "Art and Work Education Theory"
+	Term1aweprSubE string= "Art and Work Education Practical"
+	Term1flSubB    string= "প্রথম ভাষা"
+	Term1slSubB    string= "দ্বিতীয় ভাষা"
+	Term1MSubB     string= "গণিত"
+	Term1ESubB     string= "আমাদের পরিবেশ"
+	Term1hpethSubB string= "স্বাস্থ্য ও শরীর শিক্ষা তাত্বিক"
+	Term1hpeprSubB string= "স্বাস্থ্য ও শরীর শিক্ষা ব্যবহারিক"
+	Term1awethSubB string= "কলা ও কর্ম শিক্ষা তাত্বিক"
+	Term1aweprSubB string= "কলা ও কর্ম শিক্ষা ব্যবহারিক"
 )
 const (
 	Term1fl    = 10
@@ -46,6 +82,7 @@ const (
 	Term3awepr = 10
 )
 
+
 type ClassInfo struct {
 	ID        int64     `db:"id" json:"id"`
 	Name      string    `db:"name" json:"name"`
@@ -53,11 +90,7 @@ type ClassInfo struct {
 	TableName string    `db:"tablename" json:"TableName"`
 	CreatedAt time.Time `db:"created_at" json:"createdAt"`
 }
-type School struct {
-	ID        int64     `db:"id" json:"id"`
-	Name      string    `db:"name" json:"name"`
-	CreatedAt time.Time `db:"created_at" json:"createdAt"`
-}
+
 /* SQL for Student12 table:
 CREATE TABLE student12 (
 				id BIGINT PRIMARY KEY AUTO_INCREMENT,

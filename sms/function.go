@@ -62,7 +62,7 @@ func CreateClass(name string, year int64) (int64, error) {
 				term3aweth INTEGER DEFAULT 0,
 				term3awepr INTEGER DEFAULT 0
 								)`, tableName)
-	} else if name == "Class 1" || name == "Class 2" {
+	} else if name == "Class 1" || name == "Class 2" ||name=="PP"{
 		query = fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s (
 				id INTEGER PRIMARY KEY AUTOINCREMENT,
 				name VARCHAR(255) NOT NULL,

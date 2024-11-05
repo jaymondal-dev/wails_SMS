@@ -5,13 +5,13 @@
 !include "FileFunc.nsh"
 
 !ifndef INFO_PROJECTNAME
-    !define INFO_PROJECTNAME "StudentD"
+    !define INFO_PROJECTNAME "StudentD v1.1"
 !endif
 !ifndef INFO_COMPANYNAME
-    !define INFO_COMPANYNAME "StudentD"
+    !define INFO_COMPANYNAME "StudentD v1.1"
 !endif
 !ifndef INFO_PRODUCTNAME
-    !define INFO_PRODUCTNAME "StudentD"
+    !define INFO_PRODUCTNAME "StudentD v1.1"
 !endif
 !ifndef INFO_PRODUCTVERSION
     !define INFO_PRODUCTVERSION "1.0.0"

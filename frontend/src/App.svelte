@@ -1,4 +1,32 @@
 <script>
+    const SchoolName = "Name of the School";
+
+    const atcmSubE = "Ability to communicate";
+    const atcoSubE = "ability to correlate";
+    const aipsSubE = "Ability in Problem Solving";
+    const aimpcSubE = "Ability in physical and mental coordination";
+    const atcmSubB = "সংযোগ স্থাপনে সক্ষমতা";
+    const atcoSubB = "সমন্বয় সাধনে সক্ষমতা";
+    const aipsSubB = "সমস্যা সমাধনে সক্ষমতা";
+    const aimpcSubB = "মানসিক ও শারীরিক সমন্বয় সাধনে সক্ষমতা";
+
+    const flSubE = "First Language";
+    const slSubE = "Second Language";
+    const mSubE = "Mathematics";
+    const eSubE = "Our Environment";
+    const hpethSubE = "Health and Physical Education Theory";
+    const hpeprSubE = "Health and Physical Education Practical";
+    const awethSubE = "Art and Work Education Theory";
+    const aweprSubE = "Art and Work Education Practical";
+    const flSubB = "প্রথম ভাষা";
+    const slSubB = "দ্বিতীয় ভাষা";
+    const mSubB = "গণিত";
+    const eSubB = "আমাদের পরিবেশ";
+    const hpethSubB = "স্বাস্থ্য ও শরীর শিক্ষা তাত্বিক";
+    const hpeprSubB = "স্বাস্থ্য ও শরীর শিক্ষা ব্যবহারিক";
+    const awethSubB = "কলা ও কর্ম শিক্ষা তাত্বিক";
+    const aweprSubB = "কলা ও কর্ম শিক্ষা ব্যবহারিক";
+
     // Constants for Class 1 & 2
     const Term1atcm = 10;
     const Term1atco = 10;
@@ -214,7 +242,8 @@
         if (selectedStudent && selectedTable) {
             if (
                 selectedClass.name === "Class 1" ||
-                selectedClass.name === "Class 2"
+                selectedClass.name === "Class 2" ||
+                selectedClass.name === "PP"
             ) {
                 await UpdateStudent12(
                     selectedTable,
@@ -346,9 +375,9 @@
         selectedStudent[field] = validatedValue;
     }
 
-    function downloadPDF(c_name,s_name,c_id,s_id) {
+    function downloadPDF(c_name, s_name, c_id, s_id) {
         // Call the backend function
-        GenerateAndDownloadPDF(c_name,s_name,c_id,s_id)
+        GenerateAndDownloadPDF(c_name, s_name, c_id, s_id)
             .then((result) => {
                 // Convert base64 back to bytes
                 const binaryString = window.atob(result.data);
@@ -371,7 +400,7 @@
             .catch((error) => {
                 console.error("Error generating PDF:", error);
             });
-        alert("Pdf exported successfully.")
+        alert("Pdf exported successfully.");
     }
     // let urlOpen = "";
     // async function downloadPDF() {
@@ -386,11 +415,10 @@
     //         console.error("Error generating PDF:", error);
     //     }
     // }
-
 </script>
 
 <header class="flex flex-row justify-between items-center m-4">
-    <h1 class="text-3xl font-bold">School Management System</h1>
+    <h1 class="text-3xl font-bold">{SchoolName}</h1>
 
     <button
         on:click={toggleCreateClass}
@@ -575,7 +603,12 @@
                                     <button
                                         class="p-1 text-white rounded-md mr-1"
                                         on:click={() =>
-                                            downloadPDF(selectedClass.name,student.name,selectedClass.id,student.id)}
+                                            downloadPDF(
+                                                selectedClass.name,
+                                                student.name,
+                                                selectedClass.id,
+                                                student.id,
+                                            )}
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -692,9 +725,13 @@
                 bind:value={newClassName}
             >
                 <option value="">Select Class</option>
-                {#each Array(5) as _, i}
-                    <option value="Class {i + 1}">Class {i + 1}</option>
-                {/each}
+                <option value="PP">PP</option>
+
+                <option value="Class 1">Class 1</option>
+                <option value="Class 2">Class 2</option>
+                <option value="Class 3">Class 3</option>
+                <option value="Class 4">Class 4</option>
+                <option value="Class 5">Class 5</option>
             </select>
 
             <select
@@ -847,7 +884,7 @@
 {/if}
 {#if viewStudent}
     <div
-        class="fixed inset-y-0 right-0 bg-black bg-opacity-50 flex items-start justify-end z-50 h-full w-[50%]"
+        class="fixed inset-y-0 right-0 bg-black bg-opacity-50 flex items-start justify-end z-50 h-full w-[70%]"
     >
         <div
             class="bg-[#1E1E1E] border-l-2 border-l-gray-700 w-full h-full p-4 flex flex-col gap-2 relative overflow-y-auto"
@@ -936,13 +973,15 @@
                 </div>
 
                 <!-- Class-specific mark inputs -->
-                {#if selectedClass.name === "Class 1" || selectedClass.name === "Class 2"}
+                {#if selectedClass.name === "Class 1" || selectedClass.name === "Class 2"|| selectedClass.name === "PP"}
                     {#each ["Term 1", "Term 2", "Term 3"] as term}
                         <div class="mt-4">
                             <h3 class="font-bold mb-2">{term} Marks</h3>
                             <div class="grid grid-cols-2 gap-2">
                                 <div>
-                                    <p class="block text-sm mb-1">ATCM</p>
+                                    <p class="block text-sm mb-1">
+                                        {atcmSubE}/{atcmSubB}
+                                    </p>
                                     <input
                                         type="number"
                                         min="0"
@@ -954,7 +993,9 @@
                                     />
                                 </div>
                                 <div>
-                                    <p class="block text-sm mb-1">ATCO</p>
+                                    <p class="block text-sm mb-1">
+                                        {atcoSubE}/{atcoSubB}
+                                    </p>
                                     <input
                                         type="number"
                                         min="0"
@@ -966,7 +1007,9 @@
                                     />
                                 </div>
                                 <div>
-                                    <p class="block text-sm mb-1">AIPS</p>
+                                    <p class="block text-sm mb-1">
+                                        {aipsSubE}/{aipsSubB}
+                                    </p>
                                     <input
                                         type="number"
                                         min="0"
@@ -978,7 +1021,9 @@
                                     />
                                 </div>
                                 <div>
-                                    <p class="block text-sm mb-1">AIMPC</p>
+                                    <p class="block text-sm mb-1">
+                                        {aimpcSubE}/{aimpcSubB}
+                                    </p>
                                     <input
                                         type="number"
                                         min="0"
@@ -999,7 +1044,7 @@
                             <div class="grid grid-cols-2 gap-2">
                                 <div>
                                     <p class="block text-sm mb-1">
-                                        First Language
+                                        {flSubE}/{flSubB}
                                     </p>
                                     <input
                                         type="number"
@@ -1013,7 +1058,7 @@
                                 </div>
                                 <div>
                                     <p class="block text-sm mb-1">
-                                        Second Language
+                                        {slSubE}/{slSubB}
                                     </p>
                                     <input
                                         type="number"
@@ -1027,7 +1072,7 @@
                                 </div>
                                 <div>
                                     <p class="block text-sm mb-1">
-                                        Mathematics
+                                        {mSubE}/{mSubB}
                                     </p>
                                     <input
                                         type="number"
@@ -1040,7 +1085,9 @@
                                     />
                                 </div>
                                 <div>
-                                    <p class="block text-sm mb-1">EVS</p>
+                                    <p class="block text-sm mb-1">
+                                        {eSubE}/{eSubB}
+                                    </p>
                                     <input
                                         type="number"
                                         min="0"
@@ -1052,7 +1099,9 @@
                                     />
                                 </div>
                                 <div>
-                                    <p class="block text-sm mb-1">HPE Theory</p>
+                                    <p class="block text-sm mb-1">
+                                        {hpethSubE}/{hpethSubB}
+                                    </p>
                                     <input
                                         type="number"
                                         min="0"
@@ -1065,7 +1114,7 @@
                                 </div>
                                 <div>
                                     <p class="block text-sm mb-1">
-                                        HPE Practical
+                                        {hpeprSubE}/{hpeprSubB}
                                     </p>
                                     <input
                                         type="number"
@@ -1082,7 +1131,9 @@
                                     />
                                 </div>
                                 <div>
-                                    <p class="block text-sm mb-1">AWE Theory</p>
+                                    <p class="block text-sm mb-1">
+                                        {awethSubE}/{awethSubB}
+                                    </p>
                                     <input
                                         type="number"
                                         min="0"
@@ -1095,7 +1146,7 @@
                                 </div>
                                 <div>
                                     <p class="block text-sm mb-1">
-                                        AWE Practical
+                                        {aweprSubE}/{aweprSubB}
                                     </p>
                                     <input
                                         type="number"
@@ -1152,30 +1203,76 @@
                     </p>
 
                     <!-- Marks Display -->
-                    {#if selectedClass.name === "Class 1" || selectedClass.name === "Class 2"}
+                    {#if selectedClass.name === "Class 1" || selectedClass.name === "Class 2"|| selectedClass.name === "PP"}
                         {#each ["Term 1", "Term 2", "Term 3"] as term}
                             <div class="mt-4">
                                 <h3 class="font-bold mb-2">{term} Marks</h3>
-                                {#each ["atcm", "atco", "aips", "aimpc"] as subject}
-                                    <p>
-                                        {subject.toUpperCase()}: {selectedStudent[
-                                            `${term.toLowerCase().replace(" ", "")}${subject}`
-                                        ]}
-                                    </p>
-                                {/each}
+                                <p>
+                                    {atcmSubE}/{atcmSubB}: {selectedStudent[
+                                        `${term.toLowerCase().replace(" ", "")}atcm`
+                                    ]}
+                                </p>
+                                <p>
+                                    {atcoSubE}/{atcoSubB}: {selectedStudent[
+                                        `${term.toLowerCase().replace(" ", "")}atco`
+                                    ]}
+                                </p>
+                                <p>
+                                    {aipsSubE}/{aipsSubB}: {selectedStudent[
+                                        `${term.toLowerCase().replace(" ", "")}aips`
+                                    ]}
+                                </p>
+                                <p>
+                                    {aimpcSubE}/{aimpcSubB}: {selectedStudent[
+                                        `${term.toLowerCase().replace(" ", "")}aimpc`
+                                    ]}
+                                </p>
                             </div>
                         {/each}
                     {:else}
                         {#each ["Term 1", "Term 2", "Term 3"] as term}
                             <div class="mt-4">
                                 <h3 class="font-bold mb-2">{term} Marks</h3>
-                                {#each [{ label: "First Language", field: "fl" }, { label: "Second Language", field: "sl" }, { label: "Mathematics", field: "m" }, { label: "EVS", field: "e" }, { label: "HPE Theory", field: "hpeth" }, { label: "HPE Practical", field: "hpepr" }, { label: "AWE Theory", field: "aweth" }, { label: "AWE Practical", field: "awepr" }] as subject}
-                                    <p>
-                                        {subject.label}: {selectedStudent[
-                                            `${term.toLowerCase().replace(" ", "")}${subject.field}`
-                                        ]}
-                                    </p>
-                                {/each}
+                                <p>
+                                    {flSubE}/{flSubB}: {selectedStudent[
+                                        `${term.toLowerCase().replace(" ", "")}fl`
+                                    ]}
+                                </p>
+                                <p>
+                                    {slSubE}/{slSubB}: {selectedStudent[
+                                        `${term.toLowerCase().replace(" ", "")}sl`
+                                    ]}
+                                </p>
+                                <p>
+                                    {mSubE}/{mSubB}: {selectedStudent[
+                                        `${term.toLowerCase().replace(" ", "")}m`
+                                    ]}
+                                </p>
+                                <p>
+                                    {eSubE}/{eSubB}: {selectedStudent[
+                                        `${term.toLowerCase().replace(" ", "")}e`
+                                    ]}
+                                </p>
+                                <p>
+                                    {hpethSubE}/{hpethSubB}: {selectedStudent[
+                                        `${term.toLowerCase().replace(" ", "")}hpeth`
+                                    ]}
+                                </p>
+                                <p>
+                                    {hpeprSubE}/{hpeprSubB}: {selectedStudent[
+                                        `${term.toLowerCase().replace(" ", "")}hpepr`
+                                    ]}
+                                </p>
+                                <p>
+                                    {awethSubE}/{awethSubB}: {selectedStudent[
+                                        `${term.toLowerCase().replace(" ", "")}aweth`
+                                    ]}
+                                </p>
+                                <p>
+                                    {aweprSubE}/{aweprSubB}: {selectedStudent[
+                                        `${term.toLowerCase().replace(" ", "")}awepr`
+                                    ]}
+                                </p>
                             </div>
                         {/each}
                     {/if}
@@ -1202,7 +1299,13 @@
                         </button>
                         <button
                             class="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
-                            on:click={()=>downloadPDF(selectedClass.name,selectedStudent.name,selectedClass.id,selectedStudent.id)}
+                            on:click={() =>
+                                downloadPDF(
+                                    selectedClass.name,
+                                    selectedStudent.name,
+                                    selectedClass.id,
+                                    selectedStudent.id,
+                                )}
                         >
                             Export to PDF
                         </button>
